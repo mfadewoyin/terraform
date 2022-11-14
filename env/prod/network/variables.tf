@@ -27,3 +27,43 @@ variable "vpc" {
   description = "Boolean if the EIP is in a VPC or not"
   default     = true
 }
+
+variable "subnet_cidr_block" {
+  type        = map(string)
+  description = "The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length"
+  default = {
+    subnet_private = "10.0.1.0/24"
+    subnet_public  = "10.0.2.0/24"
+  }
+}
+
+variable "map_public_ip_on_launch" {
+  type        = map(bool)
+  description = "Specify true to indicate that instances launched into the subnet should be assigned a public IP address. Default is false"
+  default = {
+    subnet_public  = true
+    subnet_private = false
+  }
+}
+
+variable "route_cidr_block" {
+  type        = map(string)
+  description = "The CIDR block of the route"
+  default = {
+    subnet_private = "0.0.0.0/0"
+
+    subnet_public = "0.0.0.0/0"
+  }
+}
+
+variable "security_group_name" {
+  type    = string
+  default = "ProdSG"
+
+}
+
+variable "elb_name" {
+  type    = string
+  default = "ProdELB"
+
+}
