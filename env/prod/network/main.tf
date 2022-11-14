@@ -146,7 +146,7 @@ module "elb" {
   source = "../../../modules/elb"
 
 
-  elb_name = var.elb_name
-  subnet              = module.vpc.vpc_id
-  tag_environment     = local.tag_environment
+  elb_name          = var.elb_name
+  availability_zone = ["${data.aws_region.current.name}a"]
+  tag_environment   = local.tag_environment
 }

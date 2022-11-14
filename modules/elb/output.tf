@@ -1,3 +1,3 @@
-output "elb-dns-name" {
-  value = aws_elb.main.name
+output "elb-id" {
+  value = aws_elb.main.id
 }

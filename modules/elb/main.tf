@@ -1,17 +1,22 @@
 # Create a new load balancer
 resource "aws_elb" "main" {
   name               = var.elb_name
-  subnets = var.aws_subnet
-  security_groups = var.security_groups
+  availability_zones    = var.availability_zone
   
-  listener =[
-    {
+  listener {
     instance_port     = 80
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
-  },
-    {
+  }
+  listener {
+    instance_port     = 443
+    instance_protocol = "https"
+    lb_port           = 443
+    lb_protocol       = "https"
+    
+  }
+   /* {
     instance_port     = 443
     instance_protocol = "https"
     lb_port           = 443
@@ -21,7 +26,7 @@ resource "aws_elb" "main" {
       #            To enable SSL in ELB: uncomment this line, set "wait_for_validation = true" in ACM module and make sure that instance_protocol and lb_protocol are https or ssl.
       #            ssl_certificate_id = module.acm.acm_certificate_arn
   }
-  ]
+  ]*/
 
   health_check {
     healthy_threshold   = 2
