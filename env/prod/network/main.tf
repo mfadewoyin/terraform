@@ -150,3 +150,21 @@ module "elb" {
   availability_zone = ["${data.aws_region.current.name}a"]
   tag_environment   = local.tag_environment
 }
+
+module "route53_zone" {
+  source = "../../../modules/route53-zone"
+
+  route53_zone_name = var.route53_zone_name
+  
+}
+
+module "route53_record" {
+  source = "../../../modules/route53-record"
+
+  route53_zone_name = var.route53_zone_name
+  type = var.type
+  route53_zone_id = module.route53_zone.route53_zone_id
+  
+}
+
+

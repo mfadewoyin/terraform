@@ -52,7 +52,7 @@ variable "route_cidr_block" {
   default = {
     subnet_private = "0.0.0.0/0"
 
-    subnet_public = "0.0.0.0/0"
+    subnet_public = "10.0.0.0/16"
   }
 }
 
@@ -65,5 +65,16 @@ variable "security_group_name" {
 variable "elb_name" {
   type    = string
   default = "ProdELB"
+
+}
+
+variable "route53_zone_name" {
+  type    = string
+  default = "Prodtask.com"
+
+}
+variable "type" {
+  type    = string
+  default = "CNAME"
 
 }
